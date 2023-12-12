@@ -12,6 +12,9 @@ def handle_client(client_socket):
             if message:
                 formatted_message = f"{name}: {message}"
                 print(formatted_message)  # Server prints the message
+                if message.lower() == "exit":
+                    print("Exiting the application.")
+                    break
                 broadcast_message(formatted_message, client_socket)
             else:
                 break
@@ -45,6 +48,9 @@ print("Server is listening...")
 def receive_input():
     while True:
         message = input('')
+        if message.lower() == "exit":
+            print("Exiting the application.")
+            break
         broadcast_message("Server: " + message)
 
 thread = threading.Thread(target=receive_input)

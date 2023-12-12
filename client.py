@@ -7,6 +7,7 @@ def receive_messages(sock):
             message = sock.recv(1024).decode('utf-8')
             if message:
                 print(message)
+            
         except:
             print("An error occurred. Disconnecting...")
             sock.close()
@@ -15,8 +16,13 @@ def receive_messages(sock):
 def send_messages(sock):
     while True:
         message = input('')
+        
+        
         try:
             sock.send(message.encode('utf-8'))
+            if message.lower() == "exit":
+                print("Exiting the application.")
+                break
         except:
             print("An error occurred. Unable to send the message.")
             sock.close()
